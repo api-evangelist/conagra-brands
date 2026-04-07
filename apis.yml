@@ -1,7 +1,12 @@
 aid: conagra-brands
-url: https://raw.githubusercontent.com/api-evangelist/conagra-brands/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/conagra-brands/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.conagra-brands.com
+description: >-
+  Conagra Brands is a leading branded food company in North America with iconic brands
+  such as Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's, Banquet,
+  Birds Eye, Duncan Hines, and Orville Redenbacher's.
