@@ -30,6 +30,10 @@ specificationVersion: '0.19'
 kind: company
 apis: []
 common:
+  - type: GitHubOrganization
+    url: https://github.com/conagra
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/conagra-brands
   - type: Website
     url: https://www.conagrabrands.com
   - type: Foodservice
