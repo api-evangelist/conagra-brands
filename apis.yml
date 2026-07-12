@@ -30,6 +30,8 @@ specificationVersion: '0.19'
 kind: company
 apis: []
 common:
+  - type: DomainSecurity
+    url: security/conagra-brands-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/conagra
   - type: LinkedIn
@@ -46,6 +48,8 @@ common:
     url: https://www.conagrabrands.com/our-company/suppliers
   - type: Conagra RISE
     url: https://conagrarise.com
+  - type: Blog
+    url: https://conagrabrands.com/rss.xml
   - type: Wikipedia
     url: https://en.wikipedia.org/wiki/Conagra_Brands
 maintainers:
