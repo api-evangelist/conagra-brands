@@ -1,0 +1,21 @@
+{
+  "repo": "conagra-brands",
+  "feeds": [
+    {
+      "source": "https://conagrabrands.com/rss.xml",
+      "feed_url": "https://conagrabrands.com/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://conagrarise.com",
+      "feed_url": "https://conagrarise.com",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 10
+}
