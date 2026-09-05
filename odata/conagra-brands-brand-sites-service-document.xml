@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service xml:base="https://brands-api.conagrafoods.com/odata" xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title type="text">Default</atom:title>
+    <collection href="Labels">
+      <atom:title type="text">Labels</atom:title>
+    </collection>
+    <collection href="LabelImages">
+      <atom:title type="text">LabelImages</atom:title>
+    </collection>
+    <collection href="Products">
+      <atom:title type="text">Products</atom:title>
+    </collection>
+    <collection href="Brands">
+      <atom:title type="text">Brands</atom:title>
+    </collection>
+    <collection href="ProductCategories">
+      <atom:title type="text">ProductCategories</atom:title>
+    </collection>
+    <collection href="RecipeCollections">
+      <atom:title type="text">RecipeCollections</atom:title>
+    </collection>
+  </workspace>
+</service>

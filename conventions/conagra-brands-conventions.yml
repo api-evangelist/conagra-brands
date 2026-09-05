@@ -1,0 +1,83 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Behaviour observed against https://brands-api.conagrafoods.com/odata on 2026-09-05.
+  No conventions documentation is published by Conagra; nothing here is quoted from docs.
+api: Conagra Brand Sites API
+protocol: OData v3 over HTTPS (ASP.NET Web API 2 OData on IIS 10)
+auth_style:
+  style: none
+  detail: Anonymous HTTPS GET; no key, header or cookie is required.
+  cross_ref: authentication/conagra-brands-authentication.yml
+pagination:
+  style: server-driven, OData
+  default_page_size: 100
+  max_page_size: 100
+  request_params: ['$top', '$skip']
+  response_fields: ['odata.nextLink', 'odata.count (with $inlinecount=allpages)']
+  evidence: https://brands-api.conagrafoods.com/odata/Products
+query_options:
+  supported_observed: ['$top', '$skip', '$select', '$filter', '$orderby', '$inlinecount', '$format']
+  example: "/odata/Products?$filter=Brand eq 'WES'&$orderby=Name&$select=Name,Brand&$top=2"
+  note: >-
+    Full OData query composition works, which is the practical value of this surface:
+    a consumer can project, filter and sort server-side without a bespoke connector.
+field_expansion:
+  supported: unknown
+  detail: >-
+    No navigation property was observed on either resolvable entity set, so $expand was
+    not exercised. Products.Brand carries a brand CODE, not a navigation link.
+metadata:
+  csdl_endpoint: https://brands-api.conagrafoods.com/odata/$metadata
+  reachable: false
+  status: 404
+  impact: >-
+    Every response advertises this URL in `odata.metadata` and it does not resolve.
+    Standard OData tooling (client code generators, Excel/Power Query, CData drivers)
+    bootstraps from $metadata and will fail against this service, which is why the
+    catalog records no machine-readable contract for it despite the surface being live.
+request_id_tracing:
+  supported: false
+  detail: No correlation or request-id header was returned on any probe.
+versioning:
+  scheme: build-stamped service version, no URL or header versioning
+  current_version: v1.2023.0224.1
+  version_source: https://brands-api.conagrafoods.com/ (home page "Version" row)
+  data_service_version: '3.0'
+  in_url: false
+  note: The /odata path segment carries no version; there is no published version policy.
+error_envelope:
+  cross_ref: errors/conagra-brands-problem-types.yml
+  shapes_observed:
+    - 'odata.error (OData v3 JSON) - returned for requests routed to the OData controller'
+    - '{"Message": ..., "MessageDetail": ...} (ASP.NET Web API) - unknown entity set'
+    - 'ASP.NET yellow-screen HTML with a stack trace - unrouted paths under /odata'
+    - 'IIS static 404 HTML - $metadata and every /.well-known/ path'
+rate_limit_signaling:
+  present: false
+  cross_ref: rate-limits/conagra-brands-rate-limits.yml
+idempotency:
+  coverage: na
+  scope: []
+  mechanism: none
+  detail: >-
+    The surface is read-only. POST to /odata/Brands returned 404 with an odata.error
+    body and no mutating operation exists, so there is nothing to replay-protect. GET is
+    idempotent by HTTP semantics. `na` rather than `none`: an absent mechanism on an API
+    with no writes is not a gap.
+dry_run_mode:
+  supported: na
+  detail: No write surface, so there is nothing to rehearse.
+reversibility:
+  status: na
+  grade: na
+  detail: >-
+    No write, delete or state-changing operation exists on this API - every observed
+    route answers GET only and POST is unrouted. There is no action for an agent to take
+    back, so reversibility is not applicable rather than missing. No reversal window is
+    asserted, because Conagra states none.
+  write_surfaces: []
+  evidence:
+    - url: https://brands-api.conagrafoods.com/odata/Brands
+      method: POST
+      status: 404

@@ -64,29 +64,47 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Conagra Brands is a leading North American branded consumer packaged goods (CPG) food company headquartered in Chicago, Illinois. Its portfolio of iconic frozen, refrigerated, and shelf-stable brands includes Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's, Banquet, Birds Eye, Duncan Hines, and Orville Redenbacher's. Conagra internally describes itself as API-first across its digital estate, but does not publish any public developer APIs at this time. Partner integrations such as foodservice, retail, and supplier portals are managed via direct B2B agreements rather than a public developer surface.
+Conagra Brands is a leading North American branded consumer packaged goods (CPG) food company headquartered in Chicago, Illinois. Its portfolio of iconic frozen, refrigerated, and shelf-stable brands includes Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's, Banquet, Birds Eye, Duncan Hines, and Orville Redenbacher's. Conagra runs no developer program — no developer portal, no API documentation, no SDKs, no sign-up and no terms of use for API access, and both of its GitHub organizations are empty. It does operate one public, undocumented API: the Brand Sites API at `brands-api.conagrafoods.com`, a read-only OData v3 service that backs its consumer brand websites. Partner integrations for foodservice, retail and supplier programs remain governed by direct B2B agreements rather than a public developer surface.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/conagra-brands/refs/heads/main/apis.yml)
 
 ## Scope
 
 - **Type:** Index
-- **Position:** Consumer
+- **Position:** Producing
 - **Access:** 3rd-Party
 - **x-type:** company
 
 ## Tags
 
-- Branded Foods, CPG, Consumer Packaged Goods, Foodservice, Fortune 500, Frozen Foods, Grocery
+- Branded Foods, CPG, Consumer Packaged Goods, Foodservice, Fortune 500, Frozen Foods, Grocery, OData, Product Data
 
 ## Timestamps
 
 - **Created:** 2026-03-21
-- **Modified:** 2026-04-28
+- **Modified:** 2026-09-05
 
 ## APIs
 
-No public developer APIs have been published by Conagra Brands. Conagra's foodservice and retail partner integrations are typically governed by direct B2B agreements through its trade and supplier programs rather than a self-service developer portal.
+### Conagra Brand Sites API
+
+- **Base URL:** `https://brands-api.conagrafoods.com/odata`
+- **Human URL:** https://brands-api.conagrafoods.com/
+- **Auth:** none — anonymous HTTPS GET
+- **Protocol:** OData v3 (ASP.NET Web API 2 on IIS 10), service version `v1.2023.0224.1`
+
+Read-only product and brand data for Conagra's consumer brand sites. The service document
+advertises six entity sets; two resolve — `Products` (2,267 rows) and `Brands`. Full OData query
+composition works (`$top`, `$skip`, `$select`, `$filter`, `$orderby`, `$inlinecount`), with
+server-driven paging at 100 rows via `odata.nextLink`.
+
+Observed limitations, all recorded from live probes on 2026-09-05:
+
+- `GET /odata/$metadata` returns 404 although every response references it, so no OData client can
+  generate a model from the service.
+- `Labels`, `LabelImages`, `ProductCategories` and `RecipeCollections` are advertised in the service
+  document and all return 404.
+- No documentation, terms, plans, rate limits, status page or support channel are published for it.
 
 ## Common Properties
 
@@ -96,6 +114,9 @@ No public developer APIs have been published by Conagra Brands. Conagra's foodse
 - [Newsroom](https://www.conagrabrands.com/news-room)
 - [Suppliers](https://www.conagrabrands.com/our-company/suppliers)
 - [Conagra RISE](https://conagrarise.com)
+- [Terms and Conditions](https://www.conagrabrands.com/terms-and-conditions)
+- [Privacy Policy](https://www.conagrabrands.com/privacy-policy)
+- [Contact](https://www.conagrabrands.com/contact-us)
 - [Wikipedia](https://en.wikipedia.org/wiki/Conagra_Brands)
 
 ## Maintainers

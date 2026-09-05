@@ -1,0 +1,41 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Response headers and behaviour observed on https://brands-api.conagrafoods.com/odata,
+  2026-09-05. No documentation exists to search.
+note: >-
+  An honest zero. Conagra publishes no rate-limit documentation for this API and the
+  service returned no rate-limit signalling headers on any request. What IS enforced is a
+  server-driven page size, which is a payload limit rather than a request-rate limit -
+  recorded below so it is not mistaken for one.
+api: Conagra Brand Sites API
+limit_count: 0
+rate_limits: []
+headers_observed:
+  x_ratelimit: none
+  ratelimit: none
+  retry_after: none
+  observed_response_headers:
+    - cache-control: no-cache
+    - pragma: no-cache
+    - dataserviceversion: '3.0'
+    - server: Microsoft-IIS/10.0
+    - x-aspnet-version: 4.0.30319
+    - x-powered-by: ASP.NET
+    - access-control-allow-origin: '*'
+exhaustion_status_code: null
+page_size_limit:
+  scope: per-request
+  entity_sets: [Products, Brands]
+  max_items_per_page: 100
+  mechanism: >-
+    Server-driven paging. GET /odata/Products returns 100 of 2,267 rows plus
+    odata.nextLink = https://brands-api.conagrafoods.com/odata/Products?$skip=100.
+    $top above 100 is capped at 100.
+  evidence: https://brands-api.conagrafoods.com/odata/Products
+edge:
+  note: >-
+    The API host itself is IIS with no CDN challenge observed. Conagra's marketing hosts
+    (www.conagrabrands.com, www.conagrafoodservice.com, smartlabel.conagrabrands.com) sit
+    behind Cloudflare and issued 403/429 challenges during this pass; that is an edge bot
+    policy on the websites, not a documented API rate limit.

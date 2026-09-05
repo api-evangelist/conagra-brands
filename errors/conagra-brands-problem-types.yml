@@ -1,0 +1,67 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Error responses observed on https://brands-api.conagrafoods.com/odata, 2026-09-05.
+  Conagra publishes no error reference, so every entry is a captured response.
+api: Conagra Brand Sites API
+format: odata-error
+rfc9457: false
+note: >-
+  Four different error shapes come out of one host depending on how far the request gets
+  through the stack. A consumer cannot parse errors from this API with a single handler,
+  and one of the four leaks a .NET stack trace.
+envelopes:
+  - id: odata-error
+    media_type: application/json
+    shape: '{"odata.error": {"code": "", "message": {"lang": "en-US", "value": "..."}, "innererror": {...}}}'
+    when: request reaches the OData controller but names no matching resource
+    evidence:
+      request: POST https://brands-api.conagrafoods.com/odata/Brands
+      status: 404
+  - id: aspnet-webapi-message
+    media_type: application/json
+    shape: '{"Message": "...", "MessageDetail": "..."}'
+    when: entity set advertised in the service document has no controller behind it
+    evidence:
+      request: GET https://brands-api.conagrafoods.com/odata/ProductCategories?$top=2
+      status: 404
+      body: >-
+        {"Message":"No HTTP resource was found that matches the request URI ...",
+        "MessageDetail":"No type was found that matches the controller named 'ProductCategories'."}
+  - id: aspnet-yellow-screen
+    media_type: text/html
+    shape: 'ASP.NET "Server Error in ''/'' Application" HTML page'
+    when: path under /odata is not routed to any MVC controller
+    evidence:
+      request: GET https://brands-api.conagrafoods.com/odata/Nope
+      status: 404
+    defect: >-
+      customErrors is set to Off. The body carries the .NET framework version
+      (4.0.30319 / ASP.NET 4.7.3930.0), an HttpException type name and a full
+      System.Web.Mvc stack trace in an HTML comment. This is an information-disclosure
+      finding, reported here as observed rather than as an accusation - it is the kind of
+      thing a security.txt contact would exist to receive, and there is none.
+  - id: iis-static-404
+    media_type: text/html
+    shape: 'IIS "404 - File or directory not found." page'
+    when: request never reaches ASP.NET (all /.well-known/ paths, /robots.txt, and $metadata)
+    evidence:
+      request: GET https://brands-api.conagrafoods.com/odata/$metadata
+      status: 404
+problem_types:
+  - status: 404
+    id: resource-not-found
+    title: No HTTP resource matches the request URI
+    detail: Returned for unknown entity sets, unrouted paths, and non-GET methods.
+    remediation: >-
+      Use only the entity sets that actually resolve (Products, Brands). Four of the six
+      sets in the service document return 404.
+  - status: 404
+    id: metadata-not-served
+    title: CSDL metadata document is not available
+    detail: /odata/$metadata 404s although every response references it.
+    remediation: >-
+      Infer the model from response payloads (see data-model/) - no generated client is
+      possible without the provider serving $metadata.
+statuses_observed: [200, 404]
+statuses_not_observed: [401, 403, 429, 500]

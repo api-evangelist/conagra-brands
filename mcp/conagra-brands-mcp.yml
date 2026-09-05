@@ -1,0 +1,47 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  Searched for an official Conagra MCP server (web search, npm, github.com/conagra and
+  github.com/conagra-brands, and /mcp + /.well-known probes on brands-api.conagrafoods.com)
+  on 2026-09-05 - none exists. The tool list below is a CANDIDATE derived from the
+  entity sets that actually resolve on the Conagra Brand Sites OData API.
+status: candidate
+note: >-
+  Conagra ships no MCP server. This file records what one would expose if built, so the
+  absence is legible; it is not a claim of an agent surface. No MCPServer pointer is
+  wired into apis.yml, because that pointer asserts the provider runs a server.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+search_evidence:
+  - {query: 'Conagra MCP server', result: none}
+  - {url: https://api.github.com/orgs/conagra/repos, status: 200, public_repos: 0}
+  - {url: https://api.github.com/orgs/conagra-brands/repos, status: 200, public_repos: 0}
+  - {url: 'https://registry.npmjs.org/-/v1/search?text=conagra', status: 200, results: 0}
+candidate_tools:
+  - name: list_conagra_products
+    description: List Conagra products, optionally filtered by brand code or category.
+    backing_request: GET https://brands-api.conagrafoods.com/odata/Products
+    inputs: ['$filter', '$select', '$orderby', '$top', '$skip']
+    confidence: high
+  - name: get_conagra_product_by_upc
+    description: Retrieve one product by its GTIN/UPC key.
+    backing_request: "GET https://brands-api.conagrafoods.com/odata/Products('<GTINUPCNumber>')"
+    confidence: medium
+    note: Key-addressed read verified on Brands; not separately verified on Products.
+  - name: list_conagra_brands
+    description: List Conagra brand codes.
+    backing_request: GET https://brands-api.conagrafoods.com/odata/Brands
+    confidence: high
+  - name: get_conagra_brand
+    description: Retrieve one brand by code.
+    backing_request: "GET https://brands-api.conagrafoods.com/odata/Brands('WES')"
+    confidence: high
+blocker: >-
+  A faithful MCP server cannot be generated automatically from this API today: the CSDL
+  model at /odata/$metadata returns 404, so tool inputSchemas would have to be inferred
+  from sample payloads rather than read from the provider's own model.

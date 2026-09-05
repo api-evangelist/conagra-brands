@@ -1,0 +1,68 @@
+generated: '2026-09-05'
+method: probed
+source: https://brands-api.conagrafoods.com/odata
+note: >-
+  Request/response pairs captured verbatim from live, anonymous GET requests against
+  the Conagra Brand Sites OData v3 service on 2026-09-05. Conagra publishes no
+  documentation or spec for this API, so these observed exchanges are the only
+  example material that exists. Nothing here is authored: every field name and value
+  is copied from the response body, and each response file is the untouched payload.
+api: Conagra Brand Sites API
+base_url: https://brands-api.conagrafoods.com/odata
+authentication: none observed (anonymous HTTPS GET)
+examples:
+  - name: List entity sets (OData service document)
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata
+    response:
+      status: 200
+      content_type: application/atomsvc+xml; charset=utf-8
+      file: ../odata/conagra-brands-brand-sites-service-document.xml
+  - name: List products (first page)
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata/Products?$top=2
+    response:
+      status: 200
+      content_type: application/json; charset=utf-8
+      file: conagra-brands-products-response.json
+  - name: List brand codes
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata/Brands?$top=3
+    response:
+      status: 200
+      content_type: application/json; charset=utf-8
+      file: conagra-brands-brands-response.json
+  - name: Total product count via $inlinecount
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata/Products?$inlinecount=allpages&$top=1
+    response:
+      status: 200
+      body_excerpt: '{"odata.metadata":".../$metadata#Products","odata.count":"2267","value":[...]}'
+  - name: Read a single brand by key
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata/Brands('WES')
+    response:
+      status: 200
+      body_excerpt: '{"odata.metadata":".../$metadata#Brands/@Element","Id":"WES","DisplayCategory":true}'
+  - name: Filter products by brand code
+    request:
+      method: GET
+      url: https://brands-api.conagrafoods.com/odata/Products?$filter=Brand eq 'WES'&$top=2
+    response:
+      status: 200
+      note: $filter, $select, $orderby, $top, $skip and $inlinecount all answered 200.
+  - name: Write attempt (POST) is refused
+    request:
+      method: POST
+      url: https://brands-api.conagrafoods.com/odata/Brands
+      body: '{}'
+    response:
+      status: 404
+      content_type: application/json; charset=utf-8
+      body_excerpt: '{"odata.error":{"code":"","message":{"lang":"en-US","value":"No HTTP resource was found that matches the request URI ..."}}}'
+      note: The service exposes no write surface; POST is not routed.

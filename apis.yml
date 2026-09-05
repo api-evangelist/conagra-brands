@@ -3,41 +3,48 @@ name: Conagra Brands
 url: https://raw.githubusercontent.com/api-evangelist/conagra-brands/refs/heads/main/apis.yml
 type: Index
 deliveryModel:
-  model: unknown
+  model: self-hosted
   open_source: false
   commercial: false
-  callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  callable_host: true
+  label: Company-operated endpoint · callable, but not sold as an API product
+  confidence: medium
   source:
-  - none
-  generated: '2026-08-28'
-  method: derived
+  - odata
+  - authentication
+  - plans
+  generated: '2026-09-05'
+  method: probed
 accessModel:
   pricing: unknown
-  onboarding: unknown
+  onboarding: open
   trial: false
   try_now: false
-  public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
-position: Consuming
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  - rate-limits
+  - plans
+  generated: '2026-09-05'
+  method: probed
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/conagra-brands.png
 description: >-
-  Conagra Brands is a leading North American branded consumer packaged
-  goods (CPG) food company headquartered in Chicago, Illinois. Its
-  portfolio of iconic frozen, refrigerated, and shelf-stable brands
-  includes Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's,
-  Banquet, Birds Eye, Duncan Hines, and Orville Redenbacher's. Conagra
-  internally describes itself as API-first across its digital estate, but
-  does not publish any public developer APIs at this time. Partner
-  integrations such as foodservice, retail, and supplier portals are
-  managed via direct B2B agreements rather than a public developer
-  surface.
+  Conagra Brands is a leading North American branded consumer packaged goods (CPG)
+  food company headquartered in Chicago, Illinois. Its portfolio of iconic frozen,
+  refrigerated, and shelf-stable brands includes Marie Callender's, Healthy Choice,
+  Slim Jim, Reddi-wip, Hunt's, Banquet, Birds Eye, Duncan Hines, and Orville
+  Redenbacher's. Conagra runs no developer program: there is no developer portal,
+  no API documentation, no SDKs, no sign-up and no terms of use for API access, and
+  both of its GitHub organizations are empty. It does, however, operate one public,
+  undocumented API — the Brand Sites API at brands-api.conagrafoods.com, a read-only
+  OData v3 service that backs its consumer brand websites and answers anonymous
+  requests for 2,267 products and its brand codes. Partner integrations for
+  foodservice, retail and supplier programs remain managed through direct B2B
+  agreements rather than a public developer surface.
 tags:
   - Branded Foods
   - CPG
@@ -46,6 +53,8 @@ tags:
   - Fortune 500
   - Frozen Foods
   - Grocery
+  - OData
+  - Product Data
 tags_raw:
   - Branded Foods
   - CPG
@@ -54,30 +63,84 @@ tags_raw:
   - Fortune 500
   - Frozen Foods
   - Grocery
+  - OData
+  - Product Data
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-09-05'
 specificationVersion: '0.23'
 kind: company
-apis: []
+apis:
+  - aid: conagra-brands:conagra-brands-brand-sites-api
+    name: Conagra Brand Sites API
+    description: >-
+      Read-only OData v3 service that supplies product and brand data to Conagra's
+      consumer brand websites. The service document at /odata advertises six entity
+      sets; two of them resolve — Products (2,267 rows) and Brands — over anonymous
+      HTTPS with no key, with full OData query composition ($top, $skip, $select,
+      $filter, $orderby, $inlinecount) and server-driven paging at 100 rows via
+      odata.nextLink. Conagra publishes no documentation, terms, limits or support
+      channel for it, and the CSDL model at /odata/$metadata returns 404 even though
+      every response references it, so no OData client can generate a model from the
+      service. Discovered and probed by API Evangelist on 2026-09-05.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/conagra-brands.png
+    humanURL: https://brands-api.conagrafoods.com/
+    baseURL: https://brands-api.conagrafoods.com/odata
+    tags:
+      - Product Data
+      - OData
+      - Brands
+    tags_raw:
+      - Product Data
+      - OData
+      - Brands
+    properties:
+      - type: x-ODataServiceDocument
+        url: odata/conagra-brands-brand-sites-service-document.xml
+      - type: Authentication
+        url: authentication/conagra-brands-authentication.yml
+      - type: Conventions
+        url: conventions/conagra-brands-conventions.yml
+      - type: ErrorCatalog
+        url: errors/conagra-brands-problem-types.yml
+      - type: DataModel
+        url: data-model/conagra-brands-data-model.yml
+      - type: Examples
+        url: examples/conagra-brands-brand-sites-examples.yml
+      - type: RateLimits
+        url: rate-limits/conagra-brands-rate-limits.yml
 common:
   - type: DomainSecurity
     url: security/conagra-brands-domain-security.yml
+  - type: Conformance
+    url: conformance/conagra-brands-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/conagra-brands-lifecycle.yml
+  - type: Plans
+    url: plans/conagra-brands-plans-pricing.yml
+  - type: LLMsTxt
+    url: llms/conagra-brands-llms.txt
   - type: GitHubOrganization
     url: https://github.com/conagra
   - type: LinkedIn
     url: https://www.linkedin.com/company/conagra-brands
   - type: Website
     url: https://www.conagrabrands.com
-  - type: Foodservice
+  - type: x-Foodservice
     url: https://www.conagrafoodservice.com
-  - type: Investor Relations
+  - type: InvestorRelations
     url: https://www.conagrabrands.com/investor-relations
   - type: Newsroom
     url: https://www.conagrabrands.com/news-room
-  - type: Suppliers
+  - type: x-Suppliers
     url: https://www.conagrabrands.com/our-company/suppliers
-  - type: Conagra RISE
+  - type: x-ConagraRISE
     url: https://conagrarise.com
+  - type: Support
+    url: https://www.conagrabrands.com/contact-us
+  - type: TermsOfService
+    url: https://www.conagrabrands.com/terms-and-conditions
+  - type: PrivacyPolicy
+    url: https://www.conagrabrands.com/privacy-policy
   - type: Blog
     url: https://conagrabrands.com/rss.xml
   - type: Wikipedia
@@ -85,3 +148,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v3

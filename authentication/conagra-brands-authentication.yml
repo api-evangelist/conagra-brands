@@ -1,0 +1,48 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live anonymous requests to https://brands-api.conagrafoods.com/odata on 2026-09-05.
+  There is no published auth documentation to search - Conagra ships no developer portal.
+note: >-
+  Derived by observation, not from a securityScheme block: this provider publishes no
+  OpenAPI, so derive-authentication.py had nothing to read. Everything below is what the
+  running service did in response to an unauthenticated request.
+api: Conagra Brand Sites API
+base_url: https://brands-api.conagrafoods.com/odata
+schemes:
+  - id: none
+    type: none
+    description: >-
+      No credential of any kind is required or accepted. Plain HTTPS GET with no
+      Authorization header, no API key parameter and no cookie returned 200 on
+      /odata, /odata/Products and /odata/Brands.
+    evidence:
+      - url: https://brands-api.conagrafoods.com/odata/Products?$top=1
+        status: 200
+      - url: https://brands-api.conagrafoods.com/odata/Brands('WES')
+        status: 200
+    applies_to: every entity set that resolves (Products, Brands)
+discovery:
+  openid_configuration: 404
+  oauth_authorization_server: 404
+  oauth_protected_resource: 404
+  www_authenticate_challenge: none observed
+transport:
+  https: true
+  http_redirects_to_https: false
+  note: >-
+    http://brands-api.conagrafoods.com/odata/$metadata answered over plain HTTP without
+    a redirect to HTTPS; HTTPS is available and is the URL the service document
+    self-declares (xml:base https://brands-api.conagrafoods.com/odata).
+cors:
+  access_control_allow_origin: '*'
+  access_control_allow_headers: Content-Type
+  note: >-
+    The wildcard CORS policy means any web page can call this API directly from a
+    browser. Combined with the absence of authentication, the entire product catalogue
+    is public read data.
+observations:
+  - >-
+    Anonymous public read is almost certainly intentional - this service backs Conagra's
+    consumer brand websites, which are public - but it is undocumented, so a consumer has
+    no stated terms, no rate limit and no support path.

@@ -1,0 +1,42 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  https://brands-api.conagrafoods.com/ (service home page) and live probes, 2026-09-05.
+  Conagra publishes no versioning policy, deprecation policy, SLA or status page.
+api: Conagra Brand Sites API
+versioning:
+  scheme: build stamp on the service home page; no versioning in the URL or headers
+  current_version: v1.2023.0224.1
+  version_date_encoded: '2023-02-24'
+  data_service_version: '3.0'
+  policy_published: false
+  evidence: https://brands-api.conagrafoods.com/
+liveness:
+  last_used_reported_by_service: '2026-09-04T02:42:11'
+  note: >-
+    The service home page prints a "Last Used" timestamp. On 2026-09-05 it read
+    9/4/2026 2:42:11 AM - the API is in active production use, not an abandoned
+    endpoint, even though its build stamp is from February 2023.
+  evidence: https://brands-api.conagrafoods.com/
+deprecation:
+  policy_published: false
+  sunset_header: not observed
+  deprecation_header: not observed
+  deprecated_operations: []
+  note: >-
+    Four of the six entity sets in the service document (Labels, LabelImages,
+    ProductCategories, RecipeCollections) return 404. That is decay, not a declared
+    deprecation - the service document still advertises them, so a consumer discovers
+    the breakage only by calling.
+status_page:
+  published: false
+  url: null
+  note: No status.conagrabrands.com / status page was found for this or any Conagra surface.
+sla:
+  published: false
+support:
+  api_support_channel: none published
+  note: >-
+    There is no developer portal, contact address, security.txt or issue tracker for this
+    API. The only Conagra contact surface is the consumer/corporate form at
+    https://www.conagrabrands.com/contact-us.

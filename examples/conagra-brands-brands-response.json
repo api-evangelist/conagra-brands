@@ -1,0 +1,11 @@
+{
+  "odata.metadata":"https://brands-api.conagrafoods.com/odata/$metadata#Brands","value":[
+    {
+      "Id":"AC2","DisplayCategory":true
+    },{
+      "Id":"ACP","DisplayCategory":true
+    },{
+      "Id":"ALX","DisplayCategory":true
+    }
+  ]
+}

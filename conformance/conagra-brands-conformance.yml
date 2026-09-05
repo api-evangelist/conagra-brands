@@ -1,0 +1,79 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live probes of https://brands-api.conagrafoods.com/odata on 2026-09-05 (service
+  document, response envelopes, response headers, query-option behaviour).
+note: >-
+  Conagra publishes no compliance claim, standards statement or developer
+  documentation for this API. Every entry below is asserted from what the running
+  service actually returned, never from marketing prose. Entries that could not be
+  established are recorded as conforms:false with the probe that failed.
+domain_standard:
+  id: odata
+  name: OData (Open Data Protocol) v3
+  conforms: true
+  evidence:
+    - https://brands-api.conagrafoods.com/odata
+    - "response header: DataServiceVersion: 3.0"
+    - "response envelope: odata.metadata / odata.count / odata.nextLink / odata.error"
+  signature: >-
+    The contract declares itself: the service root returns an AtomPub service document
+    (application/atomsvc+xml) enumerating six entity sets, every JSON response carries
+    the OData v3 `odata.metadata` annotation pointing at $metadata, paging is emitted as
+    `odata.nextLink`, counts as `odata.count`, and errors as the `odata.error` envelope.
+  caveat: >-
+    The CSDL metadata document itself is NOT reachable. GET /odata/$metadata (and the
+    %24-encoded form, with and without $format) returns the IIS static-file 404 page,
+    while /odata/$batch reaches ASP.NET routing and returns an odata.error - so the `$`
+    is not being filtered wholesale, the metadata endpoint is simply not served. Every
+    response advertises a $metadata URL that 404s, which is the single biggest
+    integration defect on this surface.
+conformance:
+  - id: odata-v3
+    conforms: true
+    evidence: "DataServiceVersion: 3.0 header on https://brands-api.conagrafoods.com/odata/Brands"
+  - id: odata-v4
+    conforms: false
+    evidence: >-
+      Request with `OData-Version: 4.0` to /odata/Brands returned 404; the service is
+      v3-only (ASP.NET Web API 2 OData, .NET Framework 4.0.30319 / ASP.NET 4.7.3930.0).
+  - id: odata-csdl-metadata
+    conforms: false
+    evidence: "GET https://brands-api.conagrafoods.com/odata/$metadata -> 404 (text/html, IIS static 404)"
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Server-driven paging at 100 items with `odata.nextLink`
+      (https://brands-api.conagrafoods.com/odata/Products -> odata.nextLink
+      .../Products?$skip=100); $top and $skip honoured; $inlinecount=allpages returns
+      odata.count "2267".
+  - id: cors
+    conforms: true
+    evidence: "Access-Control-Allow-Origin: * and Access-Control-Allow-Headers: Content-Type on /odata/Brands"
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      Errors are the OData v3 `odata.error` envelope or the ASP.NET Web API
+      {Message, MessageDetail} shape; no application/problem+json was observed.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No authentication is required or offered. /.well-known/oauth-authorization-server
+      and /.well-known/openid-configuration both 404 on brands-api.conagrafoods.com;
+      anonymous GETs return 200.
+  - id: oidc
+    conforms: false
+    evidence: "https://brands-api.conagrafoods.com/.well-known/openid-configuration -> 404"
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      Not applicable in practice - the surface is read-only. POST /odata/Brands returned
+      404 with an odata.error body; no mutating operation was found.
+unverified:
+  - id: gs1-smartlabel
+    note: >-
+      Conagra runs smartlabel.conagrabrands.com, and SmartLabel is a GS1 US industry
+      programme for machine-readable product transparency. Every probe of that host was
+      answered by a Cloudflare challenge (429/403), so NO claim of SmartLabel
+      conformance is recorded here - only the observation that the host exists.
+    evidence: "https://smartlabel.conagrabrands.com/ -> 429 (Cloudflare interstitial)"

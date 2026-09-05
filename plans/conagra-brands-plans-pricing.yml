@@ -1,0 +1,25 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://www.conagrabrands.com (site + sitemap.xml), https://brands-api.conagrafoods.com/,
+  and a web search for a Conagra developer/API pricing page, 2026-09-05.
+note: >-
+  Conagra publishes no plans, no pricing page, no sign-up and no terms of use for the
+  Brand Sites API. The API is reachable anonymously at no cost, but that is an
+  undocumented state of the world rather than a published free tier - there is no
+  offer, no quota and no agreement a consumer could rely on.
+api: Conagra Brand Sites API
+plan_count: 0
+plans: []
+access:
+  cost_to_call: none observed (anonymous, no key)
+  published_offer: false
+  signup_required: false
+  contract_available: false
+evidence:
+  - url: https://www.conagrabrands.com/sitemap.xml
+    status: 200
+    finding: no developer, API, pricing or plans URL in the sitemap
+  - url: https://brands-api.conagrafoods.com/
+    status: 200
+    finding: service home page carries only a title, a version string and a link to $metadata

@@ -1,0 +1,88 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  Derived from live OData responses captured 2026-09-05 (examples/), because the CSDL
+  model at /odata/$metadata is not served. Field names, types and nullability below are
+  read off observed payloads only.
+api: Conagra Brand Sites API
+model_source: observed-payloads
+model_source_caveat: >-
+  This is an OBSERVED model, not the provider's declared one. Types are inferred from
+  JSON values across the first pages of each entity set; a field that was null in every
+  observed row is recorded as unknown type. Do not treat this as a contract.
+entity_sets_advertised: [Labels, LabelImages, Products, Brands, ProductCategories, RecipeCollections]
+entity_sets_resolvable: [Products, Brands]
+entity_sets_broken:
+  - name: Labels
+    status: 404
+    body_bytes: 0
+  - name: LabelImages
+    status: 404
+    error: "No type was found that matches the controller named 'LabelImages'."
+  - name: ProductCategories
+    status: 404
+    error: "No type was found that matches the controller named 'ProductCategories'."
+  - name: RecipeCollections
+    status: 404
+    error: "No type was found that matches the controller named 'RecipeCollections'."
+entities:
+  - name: Product
+    entity_set: Products
+    count: 2267
+    count_source: "$inlinecount=allpages -> odata.count 2267"
+    key: GTINUPCNumber
+    fields:
+      - {name: GTINUPCNumber, type: string, note: GS1 GTIN-12/UPC as a zero-padded string; doubles as the key}
+      - {name: Brand, type: string, note: brand code, joins to Brand.Id}
+      - {name: Category, type: string}
+      - {name: UPC, type: string, note: observed equal to GTINUPCNumber}
+      - {name: SAPMaterialNum, type: string, note: SAP material number, zero-padded}
+      - {name: Name, type: string}
+      - {name: Description, type: string, nullable: true}
+      - {name: ImageURL, type: string, nullable: true, note: observed values are http:// on brand domains}
+      - {name: Display, type: boolean}
+      - {name: DisplayBuyNow, type: boolean}
+      - {name: DisplayWhereToBuy, type: boolean}
+      - {name: DisplayNutrition, type: boolean}
+      - {name: DisplayClaims, type: boolean}
+      - {name: DisplayAllergens, type: boolean}
+      - {name: DisplayRatingReview, type: boolean}
+      - {name: DisplayRecipeLink, type: boolean}
+      - {name: RecipeLink, type: string, nullable: true}
+      - {name: DisplayMultipleSizes, type: boolean}
+      - {name: MultipleSizeList, type: string, nullable: true, note: comma-delimited pack sizes}
+      - {name: StartDate, type: unknown, nullable: true, note: null in every observed row}
+      - {name: EndDate, type: unknown, nullable: true, note: null in every observed row}
+      - {name: ClaimsText, type: string, nullable: true}
+      - {name: DisplayCategory, type: unknown, nullable: true, note: null in every observed row}
+      - {name: FriendlyURL, type: string, note: URL slug used by the consumer brand sites}
+      - {name: Language, type: string, note: 'observed value: EN'}
+  - name: Brand
+    entity_set: Brands
+    key: Id
+    count: 100
+    count_note: first page returned 100 rows; no odata.nextLink was present on the Brands page
+    fields:
+      - {name: Id, type: string, note: 'short brand code, e.g. WES (Wesson), SM, ACP'}
+      - {name: DisplayCategory, type: boolean}
+relationships:
+  - from: Product
+    to: Brand
+    kind: belongs_to
+    via: Brand
+    target_field: Id
+    binding: value-join
+    confidence: high
+    evidence: >-
+      Products.Brand values ('WES', 'SM') are present in the Brands entity set as Id, and
+      /odata/Brands('WES') resolves. There is no OData navigation property - the join is
+      by value, and $expand cannot be used.
+notes:
+  - >-
+    The model is presentation-oriented: eleven of the 24 Product fields are Display*
+    booleans that drive brand-website rendering, not product facts. This is a CMS
+    back-end exposed as an API, which is consistent with Conagra's Drupal brand-site
+    estate.
+  - >-
+    Nutrition, allergen and claim CONTENT is not in this API - only the booleans that say
+    whether a brand site should render those panels.

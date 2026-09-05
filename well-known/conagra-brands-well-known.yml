@@ -1,0 +1,210 @@
+generated: '2026-09-05'
+method: probed
+source: live GET probes of the named /.well-known/ path list on every host this record knows
+note: >-
+  Every named path was probed on the registrable domain, www, the API host discovered
+  this round (brands-api.conagrafoods.com), the foodservice site and the Conagra RISE
+  site. Nothing was served: every path returned 404 (or a Cloudflare 429 challenge on
+  the foodservice host). No WellKnown or SecurityTxt pointer is emitted, because a
+  recorded absence must not be published as a presence.
+hit_count: 0
+path_echo_control: passed
+hosts:
+  - host: https://www.conagrabrands.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /apis.yml
+        status: 403
+        file: null
+        note: Cloudflare bot challenge on this path only; not a served document.
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/conagra-brands-negative-control-7f3ab91c.json
+        status: 404
+        file: null
+        note: negative control - host does not echo paths
+  - host: https://conagrabrands.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/conagra-brands-negative-control-7f3ab91c.json
+        status: 404
+        file: null
+        note: negative control - host does not echo paths
+  - host: https://brands-api.conagrafoods.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /apis.yml
+        status: 404
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+      - path: /.well-known/ucp.json
+        status: 404
+        file: null
+      - path: /.well-known/acp.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /robots.txt
+        status: 404
+        file: null
+      - path: /.well-known/conagra-brands-negative-control-7f3ab91c.json
+        status: 404
+        file: null
+        note: negative control - host does not echo paths
+  - host: https://www.conagrafoodservice.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 429
+        file: null
+        note: Cloudflare interstitial - probe rate-limited, not a served document.
+      - path: /.well-known/agent-card.json
+        status: 429
+        file: null
+        note: Cloudflare interstitial - probe rate-limited, not a served document.
+      - path: /.well-known/agent.json
+        status: 429
+        file: null
+        note: Cloudflare interstitial - probe rate-limited, not a served document.
+  - host: https://conagrarise.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /apis.yml
+        status: 404
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/conagra-brands-negative-control-7f3ab91c.json
+        status: 404
+        file: null
+        note: negative control - host does not echo paths
