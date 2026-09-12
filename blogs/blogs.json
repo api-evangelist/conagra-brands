@@ -2,13 +2,18 @@
   "repo": "conagra-brands",
   "feeds": [
     {
+      "source": "https://www.conagrabrands.com/privacy-policy",
+      "feed_url": "https://www.conagrabrands.com/privacy-policy",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://conagrabrands.com/rss.xml",
       "feed_url": "https://conagrabrands.com/rss.xml",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "undetermined",
-      "nature_basis": null
+      "method": "feed"
     },
     {
       "source": "https://conagrarise.com",
@@ -18,7 +23,7 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 10,
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
