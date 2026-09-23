@@ -1,0 +1,25 @@
+# Front Door AI Index — conagra-brands — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: conagra-brands
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.conagrabrands.com
+  final_host: www.conagrabrands.com
+  ownership: own
+  owner: conagra-brands
+  shares_host_with:
+  - conagra-foods
+  inherited_from: null
+  verdict: silent
+  score: 0
+  host_score: 0
+  density: 0.0
+  words: 1881
+  tiers:
+    agentic: 0
+    core: 0
+    model: 0
+  ambiguous: 0
+  top_terms: null
