@@ -47,7 +47,6 @@ description: >-
   agreements rather than a public developer surface.
 tags:
   - Branded Foods
-  - CPG
   - Consumer Packaged Goods
   - Food Service
   - Fortune 500
@@ -55,6 +54,7 @@ tags:
   - Grocery
   - OData
   - Product Data
+  - Food and Beverage
 tags_raw:
   - Branded Foods
   - CPG
@@ -65,6 +65,7 @@ tags_raw:
   - Grocery
   - OData
   - Product Data
+  - Food and Beverage
 created: '2026-03-21'
 modified: '2026-09-05'
 specificationVersion: '0.23'
