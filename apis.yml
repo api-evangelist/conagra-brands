@@ -110,6 +110,8 @@ apis:
       - type: RateLimits
         url: rate-limits/conagra-brands-rate-limits.yml
 common:
+  - type: RateLimits
+    url: rate-limits/conagra-brands-rate-limits.yml
   - type: DomainSecurity
     url: security/conagra-brands-domain-security.yml
   - type: Conformance
