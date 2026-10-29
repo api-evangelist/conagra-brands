@@ -1,4 +1,4 @@
-# Conagra Brands (conagra-brands)
+# Conagra Brands
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,63 +64,114 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Conagra Brands is a leading North American branded consumer packaged goods (CPG) food company headquartered in Chicago, Illinois. Its portfolio of iconic frozen, refrigerated, and shelf-stable brands includes Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's, Banquet, Birds Eye, Duncan Hines, and Orville Redenbacher's. Conagra runs no developer program — no developer portal, no API documentation, no SDKs, no sign-up and no terms of use for API access, and both of its GitHub organizations are empty. It does operate one public, undocumented API: the Brand Sites API at `brands-api.conagrafoods.com`, a read-only OData v3 service that backs its consumer brand websites. Partner integrations for foodservice, retail and supplier programs remain governed by direct B2B agreements rather than a public developer surface.
+Conagra Brands is a leading North American branded consumer packaged goods (CPG) food company headquartered in Chicago, Illinois. Its portfolio of iconic frozen, refrigerated, and shelf-stable brands includes Marie Callender's, Healthy Choice, Slim Jim, Reddi-wip, Hunt's, Banquet, Birds Eye, Duncan Hines, and Orville Redenbacher's. Conagra runs no developer program: there is no developer portal, no API documentation, no SDKs, no sign-up and no terms of use for API access, and both of its GitHub organizations are empty. It does, however, operate one public, undocumented API — the Brand Sites API at brands-api.conagrafoods.com, a read-only OData v3 service that backs its consumer brand websites and answers anonymous requests for 2,267 products and its brand codes. Partner integrations for foodservice, retail and supplier programs remain managed through direct B2B agreements rather than a public developer surface.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/conagra-brands/refs/heads/main/apis.yml)
+**Areas:** Branded Foods · Consumer Packaged Goods · Food Service · Fortune 500 · Frozen Foods · Grocery · OData · Product Data · Food and Beverage
 
-## Scope
+## Conagra Brands on APIs.io
 
-- **Type:** Index
-- **Position:** Producing
-- **Access:** 3rd-Party
-- **x-type:** company
+Everything profiled for Conagra Brands is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/conagra-brands/](https://apis.io/providers/conagra-brands/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- Branded Foods, CPG, Consumer Packaged Goods, Foodservice, Fortune 500, Frozen Foods, Grocery, OData, Product Data
+- [Conagra Brand Sites API](https://apis.io/apis/conagra-brands/conagra-brands-brand-sites-api/) — Read-only OData v3 service that supplies product and brand data to Conagra's consumer brand websites. The service document at /odata advertises six entity…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-09-05
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Conagra Brand Sites API
+Model Context Protocol servers that expose the API to agents.
 
-- **Base URL:** `https://brands-api.conagrafoods.com/odata`
-- **Human URL:** https://brands-api.conagrafoods.com/
-- **Auth:** none — anonymous HTTPS GET
-- **Protocol:** OData v3 (ASP.NET Web API 2 on IIS 10), service version `v1.2023.0224.1`
+- [conagra-brands-mcp.yml](https://apis.io/servers/conagra-brands/conagra-brands-mcp-yml/)
 
-Read-only product and brand data for Conagra's consumer brand sites. The service document
-advertises six entity sets; two resolve — `Products` (2,267 rows) and `Brands`. Full OData query
-composition works (`$top`, `$skip`, `$select`, `$filter`, `$orderby`, `$inlinecount`), with
-server-driven paging at 100 rows via `odata.nextLink`.
+#### Examples (2)
 
-Observed limitations, all recorded from live probes on 2026-09-05:
+Example requests and responses.
 
-- `GET /odata/$metadata` returns 404 although every response references it, so no OData client can
-  generate a model from the service.
-- `Labels`, `LabelImages`, `ProductCategories` and `RecipeCollections` are advertised in the service
-  document and all return 404.
-- No documentation, terms, plans, rate limits, status page or support channel are published for it.
+- [Conagra Brands Brands Response](https://apis.io/examples/conagra-brands/conagra-brands-brands-response/)
+- [Conagra Brands Products Response](https://apis.io/examples/conagra-brands/conagra-brands-products-response/)
 
-## Common Properties
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Conagra Brands Authentication](https://apis.io/security/conagra-brands/conagra-brands-authentication/)
+- [Conagra Brands Domain Security](https://apis.io/security/conagra-brands/conagra-brands-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Conagra Brands Plans Pricing](https://apis.io/plans/conagra-brands/conagra-brands-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Conagra Brands Rate Limits](https://apis.io/rate-limits/conagra-brands/conagra-brands-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.conagrabrands.com)
-- [Conagra Foodservice](https://www.conagrafoodservice.com)
-- [Investor Relations](https://www.conagrabrands.com/investor-relations)
-- [Newsroom](https://www.conagrabrands.com/news-room)
-- [Suppliers](https://www.conagrabrands.com/our-company/suppliers)
-- [Conagra RISE](https://conagrarise.com)
-- [Terms and Conditions](https://www.conagrabrands.com/terms-and-conditions)
-- [Privacy Policy](https://www.conagrabrands.com/privacy-policy)
-- [Contact](https://www.conagrabrands.com/contact-us)
-- [Wikipedia](https://en.wikipedia.org/wiki/Conagra_Brands)
+- [Support](https://www.conagrabrands.com/contact-us)
+- [Blog](https://conagrabrands.com/rss.xml)
+- [Terms of service](https://www.conagrabrands.com/terms-and-conditions)
+- [Privacy policy](https://www.conagrabrands.com/privacy-policy)
+- [GitHub](https://github.com/conagra)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 20.3** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 67.0 |
+| Contract quality | 6.5 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 9.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/conagra-brands/](https://apis.io/providers/conagra-brands/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Conagra Brands: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/conagra-brands/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
